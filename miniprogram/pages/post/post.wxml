@@ -1,0 +1,73 @@
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">发布服务</view>
+</cu-custom>
+<form>
+<view class="cu-form-group">
+    <view class="title">标题</view>
+    <input bindinput="bindKeyInput" value="{{title}}" data-key="title" placeholder="请输入标题"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">标签</view>
+    <picker bindchange="bindPickerChange" value="{{index}}"  data-type='{{options[index]}}' range="{{options}}">
+      <view class="picker">
+        当前选择：{{options[index]}}
+      </view>
+    </picker>
+  </view>
+  
+  <view class="cu-form-group  margin-top">
+    <view class="title">开始日期</view>
+    <picker mode="date" value="{{startDate}}" bindchange="startDateChange">
+      <view class="picker">
+        {{startDate}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">结束日期</view>
+    <picker mode="date" value="{{endDate}}" bindchange="endDateChange">
+      <view class="picker">
+        {{endDate}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group" bindtap="chooseLocation">
+    <view class="title">家庭地址</view>
+    <text class="text-orange "><text class="cuIcon-locationfill"></text>{{location.name || '点击选择地址'}}</text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">价格（￥）</view>
+   <input bindinput="bindKeyInput" value="{{price}}" data-key="price" type="number" placeholder="请输入价格"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">联系方式</view>
+   <input bindinput="bindKeyInput" value="{{contact}}" data-key="contact" placeholder="请输入联系方式(微信/手机号/QQ)"></input>
+  </view>
+  <view class="cu-form-group align-start">
+    <view class="title">需求详情</view>
+    <textarea maxlength="-1" bindinput="bindKeyInput" value="{{content}}" data-key="content" placeholder="请输入需求详情"></textarea>
+  </view>
+  <view class="cu-bar bg-white solid-top">
+    <view class="action">照片</view>
+    <view class="action">
+      {{imgList.length}}/3
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="grid col-3 grid-square flex-sub">
+      <view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" data-url="{{imgList[index]}}">
+        <image src='{{imgList[index]}}' mode='aspectFill'></image>
+        <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+      <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<3}}">
+        <text class="cuIcon-cameraadd"></text>
+      </view>
+    </view>
+  </view>
+  <button class='margin cu-btn bg-green shadow lg block' bindtap="tapPublish">发布</button>
+  <view></view>
+</form>
+<!-- 登录弹窗 -->
+<auth is-show="{{isShowAuth}}" bind:onAuthEvent="onAuthEvent"></auth>

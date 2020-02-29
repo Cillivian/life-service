@@ -1,0 +1,96 @@
+<!-- <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">服务详情</view>
+  </cu-custom> -->
+<!-- 登录弹窗 -->
+<auth is-show="{{isShowAuth}}" bind:onAuthEvent="onAuthEvent"></auth>
+<scroll-view scroll-y class="DrawerPage {{modalName=='viewModal'?'show':''}}">
+  <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">服务详情</view>
+  </cu-custom>
+  <view>
+    <view class="cu-form-group">
+      <view class="title">标题</view>
+      <view class="">{{detail.title}}</view>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">服务类型</view>
+      <view class="">{{detail.type}}</view>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">地址</view>
+      <view class="" bindtap="showLocation">
+        <text class="cuIcon-locationfill text-orange"></text>{{detail.location.name}}</view>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">联系方式</view>
+      <view class="">{{detail.contact||'无'}}</view>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">报酬</view>
+      <view class="">{{detail.price?detail.price+'元':'无'}}</view>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">服务时间</view>
+      <view class="">{{detail.startDate}} 至 {{detail.endDate}}</view>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-white margin-top solid-top">
+    <view class="action">
+      <text class="cuIcon-titles text-green"></text>
+      <text class="text-black"> 详细</text>
+    </view>
+  </view>
+  <view class="cu-form-group bg-white solid-bottom">
+    <view class="text-black detail">{{detail.content}}</view>
+  </view>
+
+  <view class="padding bg-white" wx:if="{{detail.imgList}}" bindtap="viewImage">
+    <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+      <swiper-item wx:for="{{detail.imgList}}" wx:key="index">
+        <image src="{{item}}" mode="aspectFit"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <view class='margin-top'>
+    <button class='margin cu-btn bg-gradual-blue shadow lg block' bindtap="showModal" data-target="viewModal">查看留言</button>
+    <button class='margin cu-btn bg-green shadow lg block' data-name="shareBtn" open-type="share">分享求助</button>
+    <button wx:if="{{detail.isMine==1}}" class='margin cu-btn bg-red shadow lg block' bindtap="delRecord">删除求助</button>
+    <button wx:else class='margin cu-btn bg-blue shadow lg block' bindtap="makeCall">帮助TA</button>
+  </view>
+</scroll-view>
+<view class="DrawerClose {{modalName=='viewModal'?'show':''}}" bindtap="hideModal">
+  <text class="cuIcon-pullright"></text>
+</view>
+<scroll-view scroll-y class="DrawerWindow {{modalName=='viewModal'?'show':''}}">
+  <cu-custom>
+  </cu-custom>
+  <view class="cu-list menu-avatar comment solids-top margin-top-xl margin-bottom-xl shadow-lg margin-lr-sm">
+    <view class="cu-item input">
+      <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}});"></view>
+      <input class="solid-bottom" maxlength="35" cursor-spacing="10" bindinput="bindKeyInput" data-key="content" placeholder="输入你的评论"></input>
+      <view class="action">
+<button class="cu-btn cuIcon-add bg-gradual-blue shadow" role="button" bindtap="addComment"></button>
+      </view>
+    </view>
+    <view class="cu-item" wx:for="{{comments}}" wx:key="index">
+      <view class="cu-avatar round" style="background-image:url({{item.userInfo.avatarUrl}});"></view>
+      <view class="content">
+        <view class="text-grey">{{item.userInfo.nickName}}</view>
+        <view class="text-gray text-content text-df">
+          {{item.content}}
+        </view>
+        <view class="margin-top-sm flex justify-between">
+          <view class="text-gray text-df">{{item.date||'未知时间'}}</view>
+          <view>
+            <text class="cuIcon-appreciate text-gray"></text>
+            <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

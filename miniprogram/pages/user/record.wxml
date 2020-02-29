@@ -1,0 +1,22 @@
+ <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">搜索列表</view>
+  </cu-custom>
+
+  <view  class="cu-bar bg-gradual-blue search nav fixed" style="top:{{CustomBar}}px">
+    <view class="search-form radius">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="搜索标题" confirm-type="search" bindinput="searchRecord"></input>
+    </view>
+  </view>
+<view class="record-list cu-list menu" style="margin-top:60px;">
+  <view bindtap="goDetail" data-id="{{item._id}}" class="cu-item arrow" wx:for="{{dataList}}" wx:key="index">
+    <view class="content">
+      <text class="cuIcon-wenzi text-green"></text>
+      <text class="text-black">{{item.title}}-{{item.type}}</text>
+    </view>
+    <view class="action">
+      <text class="text-grey text-sm">{{item.time}}</text>
+    </view>
+  </view>
+</view>

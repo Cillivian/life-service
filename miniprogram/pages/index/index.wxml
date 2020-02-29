@@ -1,0 +1,58 @@
+<cu-custom bgColor="bg-gradual-blue" >
+  <view slot="content">居家服务</view>
+</cu-custom>
+<swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+    <swiper-item wx:for="{{banner}}" wx:key="index" class="{{cardCur==index?'cur':''}}">
+      <view class="swiper-item" bindtap="tapBanner" data-index="{{index}}">
+        <image src="{{item.url}}" mode="aspectFill"></image>
+      </view>
+    </swiper-item>
+  </swiper>
+ <view class="cu-bar bg-white solid-bottom">
+    <view class="action" bindtap="getLastRecord">
+      <text class="cuIcon-titles text-green"></text>
+      <text class="text-xl text-bold"> 最新发布</text>
+    </view>
+  </view>
+  <view class="cu-list menu-avatar bg-white">
+    <view class="cu-item solid-bottom" bindtap="goDetail" data-id="{{item._id}}" wx:for="{{lastRecord}}" wx:key="index">
+      <view class="cu-avatar round lg" style="background-image:url({{item.userInfo.avatarUrl}});"></view>
+      <view class="content">
+        <view class="text-grey">【{{item.location.name}}】</view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">
+							<text class="cuIcon-notification text-gray margin-right-xs"></text>{{item.content}}
+          </text>
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-grey text-xs">{{item.time}}</view>
+        <view class="cu-tag round bg-grey sm"><text class="cuIcon-location"></text>{{item.distance}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-titles text-blue"></text>
+      <text class="text-xl text-bold"> 附近求助</text>
+    </view>
+  </view>
+  <map
+    id="homeMap"
+    style="width: 100%; height:800rpx;"
+    latitude="{{location.latitude}}"
+    longitude="{{location.longitude}}"
+    scale="16"
+    markers="{{markers}}"
+    bindmarkertap="tapMarker"
+    bindcallouttap="tapMarker"
+    show-scale="true" 
+    show-location="true"
+    bindregionchange="mapRegionChange"
+  >
+    <cover-view class="controls">
+      <cover-view class="controlsBtn" bindtap="getLocation">
+        <cover-image class="img" src="/images/maplocation.png" />
+      </cover-view>
+    </cover-view>
+  </map>

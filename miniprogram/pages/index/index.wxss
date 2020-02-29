@@ -1,0 +1,48 @@
+/* pages/index/index.wxss */
+/* .home{
+  height: 100%;
+  background-image: url(https://7065-pet-real-1301063915.tcb.qcloud.la/public/images/indexTopBg.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top;
+} */
+/* .topbg{
+  display:block;
+  position:fixed;
+  top:0;
+  width:100%;
+
+} */
+.location{
+  padding: 20rpx;
+
+}
+.location text{
+  font-size: 32rpx;
+  color: #fff;
+}
+
+.menu-avatar{
+  min-height: 420rpx;
+}
+
+.controls {
+  position: absolute;
+  right:20rpx;
+  bottom:40rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.controlsBtn{
+  height: 100rpx;
+  width: 100rpx;
+}
+.controls .controlsBtn .img {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 10rpx auto;
+  opacity: 0.9;
+}
+ 

@@ -1,0 +1,18 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}"><view slot="backText">返回</view>
+				<view slot="content">帮助中心</view>
+			</cu-custom>
+<view class="home">
+  <view wx:for="{{help}}" wx:key="index">
+    <view class="cu-bar">
+      <view class="action">
+        <text class="cuIcon-titles text-green"></text>
+        <text class="text-xl text-bold"> {{item.q}}</text>
+      </view>
+    </view>
+    <view class="readme">
+      <view>
+        {{item.a}}
+      </view>
+    </view>
+  </view>
+</view>

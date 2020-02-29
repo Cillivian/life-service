@@ -1,0 +1,56 @@
+<scroll-view scroll-y class="scrollPage">
+  <view class="UCenter-bg">
+  <view class="userinfo" bindtap="goAuth">
+    <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
+    <open-data type="userNickName" class="userinfo-nickname"></open-data>
+  </view>
+    <image src="https://7a2d-z-jjfw-jjocf-1300407026.tcb.qcloud.la/service-platform/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+  <view class="padding flex text-center text-grey bg-white shadow-warp">
+    <view class="flex flex-sub flex-direction solid-right" wx:for="{{count}}" wx:key="index">
+      <view class="text-xxl {{item.color}}">{{item.num}}<text class="text-sm">{{item.unit}}</text></view>
+      <view class="margin-top-sm">
+        <text class="{{item.icon}}"></text> {{item.type}}</view>
+    </view>
+  </view>
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+    <view class="cu-item arrow">
+      <view class="content" bindtap="goRecord">
+        <text class="cuIcon-list text-green"></text>
+        <text class="text-black">发帖记录</text>
+      </view>
+    </view>
+    <view class="cu-item arrow" wx:if="isAdmin">
+      <view class="content" bindtap="goRecord">
+        <text class="cuIcon-list text-green"></text>
+        <text class="text-black">管理员管理</text>
+      </view>
+    </view>
+     <view class="cu-item arrow">
+      <button class="cu-btn content" bindtap="goHelp">
+        <text class="cuIcon-question text-blue"></text>
+        <text class="text-black" style="font-weight:normal;">帮助中心</text>
+      </button>
+    </view>
+    <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="contact" bindcontact="handleContact">
+        <text class="cuIcon-servicefill text-cyan"></text>
+        <text class="text-black" style="font-weight:normal;">联系客服</text>
+      </button>
+    </view>
+    <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="feedback">
+        <text class="cuIcon-writefill text-grey"></text>
+        <text class="text-black" style="font-weight:normal;">意见反馈</text>
+      </button>
+    </view>
+    <view class="cu-item arrow">
+      <button class="cu-btn content" data-name="shareBtn" open-type="share">
+        <text class="cuIcon-share text-green"></text>
+        <text class="text-black" style="font-weight:normal;">分享好友</text>
+      </button>
+    </view>
+  </view>
+</scroll-view>
+<!-- 登录弹窗 -->
+<auth is-show="{{isShowAuth}}" bind:onAuthEvent="onAuthEvent"></auth>
