@@ -136,9 +136,9 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: '点击查看附件居家服务',
+      title: '点击查看附近居家服务',
       path: '/pages/index/index',
-      imageUrl: '/images/share.jpg'
+      imageUrl: 'https://7a2d-z-jjfw-jjocf-1300407026.tcb.qcloud.la/service-platform/share.jpg'
     }
   },
 })

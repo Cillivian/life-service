@@ -46,23 +46,16 @@ Page({
     startDate: genDefDate(),
     endDate: genDefDate(),
     title: '',
-    price: 0,
+    price: null,
     content: '',
     contact: '',
     imgList: [],
   },
   onShow() {
-    const location = chooseLocationPlugin.getLocation();
-    if (location) {
-      console.log(location);
-      this.setData({ location: location });
-    } else {
       this.setData({
         userInfo: app.globalData.userInfo
       })
       this.checkLogin();
-    }
-    
   },
   // 标题，价格，需求
   bindKeyInput(e) {
@@ -163,6 +156,9 @@ Page({
     data.createTime = new Date().getTime();
     if (typeof (data.location.name) == 'undefined') {
       errorMsg = '请选择地址';
+    }
+    if (!data.userInfo){
+      errorMsg='请先登录'
     }
     if (data.imgList.length < 1) {
       errorMsg = '至少上传一张照片';

@@ -19,6 +19,7 @@ Page({
     comments:[],
   },
   onLoad(options) {
+    this.checkLogin()
     let id = options.id;
     this.setData({
       id: id,
@@ -134,6 +135,21 @@ Page({
       urls: this.data.detail.imgList
     });
   },
+  checkLogin() {
+    let userInfo = app.globalData.userInfo || {};
+    console.log(userInfo)
+    if (!userInfo) {
+      wx.showToast({
+        icon: 'none',
+        title: '请先登录帐号',
+        duration: 1000,
+      })
+      this.showAuthDialog();
+      return false;
+    } else {
+      return true;
+    }
+  },
   showAuthDialog() {
     this.setData({
       isShowAuth: true
@@ -141,11 +157,9 @@ Page({
   },
   onAuthEvent: function (e) {
     console.log('onAuthEvent', e);
-    if (e.detail.mobile) {
-      this.setData({
-        userInfo: e.detail
-      })
-    }
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
   },
   onPullDownRefresh() {
     this.getDetail();
@@ -190,6 +204,9 @@ Page({
     console.log(data)
     if(data.content==''){
       errorMsg="内容不能为空"
+    }
+    if (!data.userInfo){
+      errorMsg = "请先登录"
     }
     if (data.post_id == ''||data.post_id==null) {
       errorMsg = "内容错误"
